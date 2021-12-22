@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/JavaDA_PROJECT7_RESTAPI-master.iml" filepath="$PROJECT_DIR$/.idea/JavaDA_PROJECT7_RESTAPI-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Poseiden-skeleton/spring-boot-skeleton.iml" filepath="$PROJECT_DIR$/Poseiden-skeleton/spring-boot-skeleton.iml" />
     </modules>
   </component>
 </project>
