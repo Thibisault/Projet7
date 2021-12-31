@@ -13,7 +13,11 @@ import java.sql.Timestamp;
 @Table(name = "trade")
 public class Trade {
     // TODO: Map columns in data table TRADE with corresponding java fields
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     Integer tradeId;
+
     String account;
     String type;
     Double buyQuantity;

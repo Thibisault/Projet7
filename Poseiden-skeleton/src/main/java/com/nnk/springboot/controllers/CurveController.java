@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @Controller
 public class CurveController {
-    // TODO: Inject Curve Point service
+    // TODO: Inject Curve Point com.nnk.springboot.service
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model)
@@ -42,7 +42,7 @@ public class CurveController {
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Curve and return Curve list
+        // TODO: check required fields, if valid call com.nnk.springboot.service to update Curve and return Curve list
         return "redirect:/curvePoint/list";
     }
 

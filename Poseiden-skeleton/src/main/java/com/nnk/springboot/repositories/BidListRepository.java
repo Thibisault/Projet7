@@ -2,11 +2,12 @@ package com.nnk.springboot.repositories;
 
 import com.nnk.springboot.domain.BidList;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.security.Timestamp;
 import java.util.Optional;
 
-
+@Repository
 public interface BidListRepository extends JpaRepository<BidList, Integer> {
 
     public Optional<BidList> findByBidListId(Integer bidListId);
@@ -26,7 +27,7 @@ public interface BidListRepository extends JpaRepository<BidList, Integer> {
     public Optional<BidList> findByCreationName(String creationName);
     public Optional<BidList> findByCreationDate(Timestamp creationDate);
     public Optional<BidList> findByRevisionName(String revisionName);
-    public Optional<BidList> findByRrevisionDate(Timestamp revisionDate);
+    public Optional<BidList> findByRevisionDate(Timestamp revisionDate);
     public Optional<BidList> findByDealName(String dealName);
     public Optional<BidList> findByDealType(String dealType);
     public Optional<BidList> findBySourceListId(String sourceListId);

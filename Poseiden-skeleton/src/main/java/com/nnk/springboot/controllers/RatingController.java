@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @Controller
 public class RatingController {
-    // TODO: Inject Rating service
+    // TODO: Inject Rating com.nnk.springboot.service
 
     @RequestMapping("/rating/list")
     public String home(Model model)
@@ -42,7 +42,7 @@ public class RatingController {
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Rating and return Rating list
+        // TODO: check required fields, if valid call com.nnk.springboot.service to update Rating and return Rating list
         return "redirect:/rating/list";
     }
 
