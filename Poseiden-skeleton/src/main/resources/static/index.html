@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Spring Boot </title>
+    <link th:rel="stylesheet" th:href="/css/styles.css"/>
+</head>
+<body>
+<h3> HOME PAGE </h3>
+
+
+<div class="container bg-light border border-dark text-center shadow-lg bg-white rounded col-md-6 offset-md-3 my-5">
+    <div class="row">
+        <div class="col py-5">
+            <a class="p-3 mb-2 bg-success text-white">Pay My Buddy</a>
+        </div>
+        <form action="#" th:action="@{/seConnecter}" th:object="${connexion}" method="post">
+            <div class="form-group col col-md-2 offset-md-5 py-2  ">
+                <input type="text" th:name="pseudo" class="form-control" placeholder="Pseudo">
+            </div>
+            <div class="form-group col col-md-2 offset-md-5 py-2" >
+                <input type="password" th:name="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group col py-3 mx-auto">
+                <input type="submit" value="Login" />
+            </div>
+            <div class="col mt-4 p-10 py-5 mx-auto">
+                <a class="p-2 bg-info text-white" href="@{/templates/bidList/add}">Add</a>
+                <a class="p-2 bg-info text-white" th:href="@{/add}">indexAdd</a>
+                <a class="p-2 bg-info text-white" th:href="@{/templates/bidList/add}">Add</a>
+                <a class="p-2 bg-info text-white" th:href="@{bidList/list}">List</a>
+                <a class="p-2 bg-info text-white" th:href="@{bidList/update}">Update</a>
+                <a class="p-2 bg-info text-white" th:href="@{/403}">403</a>
+
+                <a href="./bidList/add" data-th-href="@{/add}">Add</a>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>
