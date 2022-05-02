@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Spring Boot </title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div class="container offset-md-1 col-10">
+    <div class="row">
+        <div class="col-6">
+            <a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
+            <a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
+            <a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
+            <a href="/trade/list">Trade</a>&nbsp;|&nbsp;
+            <a href="/ruleName/list">Rule</a>
+        </div>
+
+<div class="container text-center my-5">
+
+    <div class="row offset-md-5">
+        <h3> HOME PAGE </h3>
+    </div>
+        <div class="col">
+            <a href="/login">Login</a> or create one <a href="/user/list">User management</a>
+        </div>
+
+    <div class="text-right">
+        <img class="background-attachment : scroll" th:src="@{/image/logo.png}" style="width:13%" />
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Home</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+</head>
+<body>
+
+<div class="container text-center my-5">
+
+	<div class="row offset-md-5">
+		<h2>Add User</h2>
+	</div>
+
+	<div class="row">
+		<form action="#" th:action="@{/user/validate}" th:object="${user}" method="post" class="form-horizontal" style="width: 100%">
+			<div class="form-group">
+				<label for="fullname" class="col-sm-2 control-label">Full Name</label>
+				<div class="col">
+					<input type="text" th:field="*{fullname}" id="fullname" placeholder="Full Name" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="username" class="col-sm-2 control-label">User Name</label>
+				<div class="col">
+					<input type="text" th:field="*{username}" id="username" placeholder="User Name" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-sm-2 control-label">Password</label>
+				<div class="col">
+					<input type="password" th:field="*{password}" id="password" placeholder="Password" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-sm-2 control-label">Role</label>
+				<div class="col">
+					<label class="checkbox-inline"><input type="radio" th:field="*{role}" th:value="ADMIN">Admin</label>
+					<label class="checkbox-inline"><input type="radio" th:field="*{role}" th:value="USER">User</label>
+					<p class="text-danger" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></p>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div class="col">
+					<a class="btn btn-danger btn-sm" href="user/list">Cancel</a>
+					<input class="btn btn-primary btn-sm" type="submit" value="Add user">
+				</div>
+			</div>
+
+		</form>
+	</div>
+	<div class="text-right">
+		<img class="background-attachment : scroll" th:src="@{/image/logo.png}" style="width:13%" />
+	</div>
+</div>
+</body>
+</html>

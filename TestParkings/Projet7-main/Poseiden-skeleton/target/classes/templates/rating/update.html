@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<title>Home</title>
+	<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+</head>
+<body>
+
+<div class="container text-center my-5">
+
+	<div class="row offset-md-5">
+		<h2>Update Rating</h2>
+	</div>
+
+	<div class="row">
+		<form action="#" th:action="@{/rating/update/{id}(id=${updateRating.id})}" th:object="${updateRating}" method="post" class="form-horizontal" style="width: 100%">
+			<!--
+			TODO: Create a form to input the values of Bid, there are 2 buttons: Save data and Cancel to the list Bid
+			 -->
+			<div class="form-group">
+				<label for="moodysRating" class="col control-label">moodysRating</label>
+				<div class="col">
+					<input type="text" th:field="*{moodysRating}" id="moodysRating" placeholder="moodysRating" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('moodysRating')}" th:errors="*{moodysRating}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="sandPRating" class="col control-label">sandPRating</label>
+				<div class="col">
+					<input type="text" th:field="*{sandPRating}" id="sandPRating" placeholder="sandPRating" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('sandPRating')}" th:errors="*{sandPRating}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="fitchRating" class="col control-label">fitchRating</label>
+				<div class="col">
+					<input type="text" th:field="*{fitchRating}" id="fitchRating" placeholder="fitchRating" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('fitchRating')}" th:errors="*{fitchRating}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="orderNumber" class="col control-label">orderNumber</label>
+				<div class="col">
+					<input type="number" th:field="*{orderNumber}" id="orderNumber" placeholder="orderNumber" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('orderNumber')}" th:errors="*{orderNumber}"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col">
+					<a class="btn btn-danger btn-sm" href="/rating/list">Cancel</a>
+					<input class="btn btn-primary btn-sm" type="submit" value="Update Rating">
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+	<div class="text-right">
+		<img class="background-attachment : scroll" th:src="@{/image/logo.png}" style="width:13%" />
+	</div>
+
+</div>
+</body>
+</html>
