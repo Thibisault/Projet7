@@ -40,11 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         }
     };
 
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.parentAuthenticationManager(authenticationManagerBean())
-                .userDetailsService(userDetailsServiceBean());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+
 
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
@@ -55,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/logout").permitAll()
@@ -63,50 +65,52 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/update").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .authenticationProvider(getProvider())
-                .formLogin().loginPage("/login").permitAll()
+                //.authenticationProvider(getProvider())
+                .formLogin().loginPage("/login")
                 .successHandler(myAuthenticationSuccessHandler())
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login");
     }
 
+    /*
     private static class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-
         @Override
-        public void onAuthenticationSuccess(HttpServletRequest request,
-                                            HttpServletResponse response, Authentication authentication)
+        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
                 throws IOException, ServletException {
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }
 
     private static class AuthentificationLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
-
         @Override
-        public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-                                    Authentication authentication) throws IOException, ServletException {
+        public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }
+     */
 
+    /*
     @Bean
     public AuthenticationProvider getProvider() {
         AppAuthProvider provider = new AppAuthProvider();
         provider.setUserDetailsService(userDetailsService);
         return provider;
-
     }
+     */
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+
+    /*
      public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
+     */
 }
