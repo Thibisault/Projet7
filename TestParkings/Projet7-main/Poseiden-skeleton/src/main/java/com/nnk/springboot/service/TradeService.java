@@ -16,7 +16,7 @@ public class TradeService {
     TradeRepository tradeRepository;
 
     /**
-     * Enregeistrer un bidList Dans la base de données
+     * Enregeistrer un Trade Dans la base de données
      *
      * @param trade
      */
@@ -32,14 +32,22 @@ public class TradeService {
     public List<Trade> chercherTouteLesTrade() {
         List<Trade> tradeList = new ArrayList<>();
         tradeList = tradeRepository.findAll();
-        System.out.println("Je suis là"+ tradeList);
         return tradeList;
     }
 
+    /**
+     * Recuperer un Trade par son tradeId
+     * @param tradeId
+     * @return
+     */
     public Trade chercherByTradeId(Integer tradeId) {
         return tradeRepository.findByTradeId(tradeId).orElse(null);
     }
 
+    /**
+     * Supprimer un Trade de la base donnees
+     * @param trade
+     */
     public void supprimerTrade(Trade trade){
         tradeRepository.delete(trade);
     }

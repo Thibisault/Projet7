@@ -6,6 +6,7 @@ import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,6 +29,20 @@ public class LoginService {
             return user;
         }
         throw new Exception("Le mot de passe ne correspond pas au pseudo");
+    }
+
+    public User validerConnection (User user){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return user;
+    }
+
+    public User encrypterPassword(User user, Integer id){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
+        user.setId(id);
+        return user;
     }
 
 }

@@ -16,7 +16,7 @@ public class RulenameService {
     RuleNameRepository ruleNameRepository;
 
     /**
-     * Enregeistrer un bidList Dans la base de données
+     * Enregeistrer un ruleName Dans la base de données
      *
      * @param ruleName
      */
@@ -25,7 +25,7 @@ public class RulenameService {
     }
 
     /**
-     * Récuperer tout les RuleName
+     * Récuperer tous les RuleName
      *
      * @return
      */

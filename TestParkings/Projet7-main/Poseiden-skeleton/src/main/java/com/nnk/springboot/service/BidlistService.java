@@ -5,16 +5,15 @@ import com.nnk.springboot.repositories.BidListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BidlistService {
 
+
     @Autowired
     BidListRepository bidListRepository;
+
 
     /**
      * Enregeistrer un bidList Dans la base de données
@@ -31,7 +30,7 @@ public class BidlistService {
      * @return
      */
     public List<BidList> chercherTouteLesBidList() {
-        List<BidList> bidList = new ArrayList<>();
+        List<BidList> bidList;
         bidList = bidListRepository.findAll();
         return bidList;
     }
@@ -55,7 +54,7 @@ public class BidlistService {
         return bidListRepository.findByAccount(account).orElse(null);
     }
 
-    public BidList chercherBytype(String type) {
+    public BidList chercherByType(String type) {
         return bidListRepository.findByType(type).orElse(null);
     }
 
@@ -77,10 +76,6 @@ public class BidlistService {
 
     public BidList chercherBybenchmark(String benchmark) {
         return bidListRepository.findByBenchmark(benchmark).orElse(null);
-    }
-
-    public BidList chercherBybidListDate(Timestamp bidListDate) {
-        return bidListRepository.findByBidListDate(bidListDate).orElse(null);
     }
 
     public BidList chercherBycommentary(String commentary) {
@@ -107,16 +102,8 @@ public class BidlistService {
         return bidListRepository.findByCreationName(creationName).orElse(null);
     }
 
-    public BidList chercherBycreationDate(Timestamp creationDate) {
-        return bidListRepository.findByCreationDate(creationDate).orElse(null);
-    }
-
     public BidList chercherByrevisionName(String revisionName) {
         return bidListRepository.findByRevisionName(revisionName).orElse(null);
-    }
-
-    public BidList chercherByrevisionDate(Timestamp revisionDate) {
-        return bidListRepository.findByRevisionDate(revisionDate).orElse(null);
     }
 
     public BidList chercherBydealName(String dealName) {

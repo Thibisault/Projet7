@@ -3,16 +3,12 @@ package com.nnk.springboot.service;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.security.SecurityConfig;
-import com.nnk.springboot.security.SimpleGrantedAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,7 +44,7 @@ public class UserService implements UserDetailsService {
      * @return
      */
     public List<User> chercherTouteUser() {
-        List<User> userList = new ArrayList<>();
+        List<User> userList;
         userList = userRepository.findAll();
         return userList;
     }
@@ -57,7 +53,11 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(userId).orElse(null);
     }
 
-    public void supprimerBidList(User user) {
+    public User chercherByIdWithException(Integer userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + userId));
+    }
+
+    public void supprimerUser(User user) {
         userRepository.delete(user);
     }
 

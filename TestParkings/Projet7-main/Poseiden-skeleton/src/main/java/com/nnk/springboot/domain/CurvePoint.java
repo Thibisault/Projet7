@@ -17,7 +17,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "curvepoint")
 public class CurvePoint {
-    // TODO: Map columns in data table CURVEPOINT with corresponding java fields
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -37,7 +36,6 @@ public class CurvePoint {
     Timestamp creationDate;
 
     public CurvePoint(int i, double v, double v1) {
-        // Todo : Revoir les liens
         curveId = i;
         term = v;
         value = v1;

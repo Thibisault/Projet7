@@ -53,10 +53,6 @@ public class CurvepointService {
         return curvePointRepository.findByCurveId(id).orElse(null);
     }
 
-    public CurvePoint chercherByAsOfDate(Timestamp asOfDate) {
-        return curvePointRepository.findByAsOfDate(asOfDate).orElse(null);
-    }
-
     public CurvePoint chercherByTerm(Double term) {
         return curvePointRepository.findByTerm(term).orElse(null);
     }
@@ -64,9 +60,4 @@ public class CurvepointService {
     public CurvePoint chercherByValue(Double value) {
         return curvePointRepository.findByValue(value).orElse(null);
     }
-
-    public CurvePoint chercherByCreationDate(Timestamp creationDate) {
-        return curvePointRepository.findByCreationDate(creationDate).orElse(null);
-    }
-
 }

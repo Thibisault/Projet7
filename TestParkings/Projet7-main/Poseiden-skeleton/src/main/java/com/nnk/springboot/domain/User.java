@@ -37,6 +37,7 @@ public class User implements Serializable, UserDetails {
     private String role;
 
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> listRole = new ArrayList<GrantedAuthority>();

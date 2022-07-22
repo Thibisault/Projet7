@@ -25,7 +25,7 @@ public class RatingService {
     }
 
     /**
-     * Récuperer tout les Rating
+     * Récuperer tous les Rating
      *
      * @return
      */
