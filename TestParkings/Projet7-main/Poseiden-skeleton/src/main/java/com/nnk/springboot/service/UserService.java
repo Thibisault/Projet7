@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -18,16 +20,27 @@ public class UserService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    LoginService loginService;
+
     SecurityConfig securityConfig = new SecurityConfig();
 
-    private final UserRepository userRepositorys;
-
+    /*
     @Autowired
     public UserService(UserRepository userRepository, UserRepository userRepositorys) {
         this.userRepository = userRepository;
-        this.userRepositorys = userRepositorys;
     }
+      */
 
+    public void updateUserSansChangerMDP(Integer id, User user){
+        if(user.getPassword().equals("")) {
+            User userBdd = userRepository.findById(id).orElse(null);
+            user.setPassword(userBdd.getPassword());
+        } else {
+            loginService.encrypterPassword(user, id);
+        }
+        userRepository.save(user);
+    }
 
     /**
      * Enregeistrer un bidList Dans la base de données

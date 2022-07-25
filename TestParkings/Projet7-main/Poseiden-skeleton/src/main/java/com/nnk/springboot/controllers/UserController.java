@@ -45,7 +45,6 @@ public class UserController {
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         User user = userService.chercherByIdWithException(id);
-        user.setPassword(userService.chercherById(id).getPassword());
         model.addAttribute("updateUser", user);
         return "user/update";
     }
@@ -53,11 +52,20 @@ public class UserController {
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
                              BindingResult result, Model model) {
+
         if (result.hasErrors()) {
-            return "redirect:{id}";
+            int nombreErreur = result.getErrorCount();
+            if (nombreErreur > 0) {
+                if (nombreErreur > 1) {
+                    return "redirect:{id}";
+                } else {
+                    if (!result.toString().contains("Password is mandatory")) {
+                        return "redirect:{id}";
+                    }
+                }
+            }
         }
-        loginService.encrypterPassword(user, id);
-        userService.creerNewUser(user);
+        userService.updateUserSansChangerMDP(id, user);
         model.addAttribute("updateUser", userService.chercherTouteUser());
         return "redirect:/user/list";
     }
