@@ -15,7 +15,6 @@ public class CurvepointService {
     @Autowired
     CurvePointRepository curvePointRepository;
 
-
     /**
      * Enregeistrer un bidList Dans la base de données
      *
@@ -26,37 +25,56 @@ public class CurvepointService {
         curvePointRepository.save(curvePoint);
     }
 
+    /**
+     * Permet de recupérer tout les CurvePoint de la BDD
+     * @return
+     */
     public List<CurvePoint> chercherTouteLesCurvesPoint() {
         List<CurvePoint> curvePointList = new ArrayList<>();
         curvePointList = curvePointRepository.findAll();
         return curvePointList;
     }
 
-
+    /**
+     * Permet de supprimer un CurvePoint de la BDD
+     * @param curvePoint
+     */
     public void supprimerBidList(CurvePoint curvePoint){
         curvePointRepository.delete(curvePoint);
     }
 
     /**
-     * Chercher dans la table CurvePoint une entité par chacune de ses colones
-     *
+     * Permet de chercher un CurvePoint dans la BDD grâce à id
      * @param id
      * @return
      */
-
     public CurvePoint chercherById(Integer id) {
         return curvePointRepository.findById(id).orElse(null);
     }
 
-
+    /**
+     * Permet de chercher un CurvePoint dans la BDD grâce à curveId
+     * @param id
+     * @return
+     */
     public CurvePoint chercherByCurveId(Integer id) {
         return curvePointRepository.findByCurveId(id).orElse(null);
     }
 
+    /**
+     * Permet de chercher un CurvePoint dans la BDD grâce à term
+     * @param term
+     * @return
+     */
     public CurvePoint chercherByTerm(Double term) {
         return curvePointRepository.findByTerm(term).orElse(null);
     }
 
+    /**
+     * Permet de chercher un CurvePoint dans la BDD grâce à value
+     * @param value
+     * @return
+     */
     public CurvePoint chercherByValue(Double value) {
         return curvePointRepository.findByValue(value).orElse(null);
     }

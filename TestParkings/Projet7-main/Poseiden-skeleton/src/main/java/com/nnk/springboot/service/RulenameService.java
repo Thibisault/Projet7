@@ -35,10 +35,19 @@ public class RulenameService {
         return ruleName;
     }
 
+    /**
+     * permet de chercher un RuleName dans la BDD grâce à son ruleNameId
+     * @param ruleNameId
+     * @return
+     */
     public RuleName chercherById(Integer ruleNameId) {
         return ruleNameRepository.findById(ruleNameId).orElse(null);
     }
 
+    /**
+     * Permet de supprimer un RuleName dans la BDD
+     * @param ruleName
+     */
     public void supprimerBidList(RuleName ruleName){
         ruleNameRepository.delete(ruleName);
     }

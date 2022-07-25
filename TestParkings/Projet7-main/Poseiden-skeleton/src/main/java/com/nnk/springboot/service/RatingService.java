@@ -35,10 +35,19 @@ public class RatingService {
         return ratingList;
     }
 
+    /**
+     * Permet de chercher un Rating dans la BDD grâce à son id
+     * @param id
+     * @return
+     */
     public Rating chercherById(Integer id) {
         return ratingRepository.findById(id).orElse(null);
     }
 
+    /**
+     * permet de supprimer un Rating dans la BDD
+     * @param rating
+     */
     public void supprimerBidList(Rating rating){
         ratingRepository.delete(rating);
     }

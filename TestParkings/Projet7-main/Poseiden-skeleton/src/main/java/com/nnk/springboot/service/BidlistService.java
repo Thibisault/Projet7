@@ -10,10 +10,8 @@ import java.util.List;
 @Service
 public class BidlistService {
 
-
     @Autowired
     BidListRepository bidListRepository;
-
 
     /**
      * Enregeistrer un bidList Dans la base de données
@@ -35,10 +33,13 @@ public class BidlistService {
         return bidList;
     }
 
+    /**
+     * Permet de supprimer un BidList dans la BDD
+     * @param bidList
+     */
     public void supprimerBidList(BidList bidList){
         bidListRepository.delete(bidList);
     }
-
 
     /**
      * Chercher dans la table BidList une entité par chacune de ses colones

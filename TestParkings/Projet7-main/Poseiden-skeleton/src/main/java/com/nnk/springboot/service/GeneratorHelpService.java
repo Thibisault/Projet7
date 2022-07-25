@@ -34,6 +34,8 @@ public class GeneratorHelpService {
     private UserRepository userRepository;
 
 
+    //cette classe permet de faciliter les tests en générant des BidList, CurvePoint,Rating, RuleName, Trade et user aléatoirement qui seront unique dans la base de données.
+
     public List<BidList> generatorBidListTest(int nombreDeGeneration){
         List<BidList> listBidList = new ArrayList<>();
         for (int i = 0; i <nombreDeGeneration; i++) {

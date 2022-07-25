@@ -23,6 +23,13 @@ public class LoginService {
     @Autowired
     private UserService userService;
 
+    /**
+     * premet de se connecter à l'application en vérifiant les mots de passes
+     * @param userName
+     * @param password
+     * @return
+     * @throws Exception
+     */
     public User seConnecter(String userName, String password) throws Exception {
         User user = (User) userService.loadUserByUsername(userName);
         if (securityConfig.passwordEncoder().matches(password, user.getPassword())) {
@@ -31,6 +38,11 @@ public class LoginService {
         throw new Exception("Le mot de passe ne correspond pas au pseudo");
     }
 
+    /**
+     * Permet de mettre à jour un User dans la base de données
+     * @param user
+     * @return
+     */
     public User validerConnection (User user){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
@@ -38,6 +50,12 @@ public class LoginService {
         return user;
     }
 
+    /**
+     * Permet d'encrypter un mot de passe user dans la BDD
+     * @param user
+     * @param id
+     * @return
+     */
     public User encrypterPassword(User user, Integer id){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));

@@ -14,6 +14,10 @@ public class LoginController {
     @Autowired
     UserService userService;
 
+    /**
+     * Permet le redirection vers la page de login
+     * @return
+     */
     @GetMapping("/login")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView();
@@ -21,7 +25,10 @@ public class LoginController {
         return mav;
     }
 
-
+    /**
+     * Permet la déconnexion du compte
+     * @return
+     */
     @GetMapping("/logout")
     public ModelAndView logout() {
         ModelAndView mav = new ModelAndView();
@@ -38,6 +45,10 @@ public class LoginController {
     }
 
 
+    /**
+     * Permet d'afficher une page d'erreur
+     * @return
+     */
     @GetMapping("error")
     public ModelAndView error() {
         ModelAndView mav = new ModelAndView();
