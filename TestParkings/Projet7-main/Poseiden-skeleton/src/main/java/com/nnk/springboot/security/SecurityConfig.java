@@ -28,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userDetailsService;
 
+    @Autowired
+    CustomOAuth2UserService customOAuth2UserService;
+
 
     private AccessDeniedHandler accessDeniedHandler = new AccessDeniedHandler() {
         @Override
@@ -62,12 +65,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .successHandler(myAuthenticationSuccessHandler())
-                .and()
-                .oauth2Login()
-                .and()
-                .logout()
-                .logoutSuccessUrl("/login");
+                .successHandler(myAuthenticationSuccessHandler());
+                http.oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
+                http.logout().logoutSuccessUrl("/login");
+
     }
 
     @Bean

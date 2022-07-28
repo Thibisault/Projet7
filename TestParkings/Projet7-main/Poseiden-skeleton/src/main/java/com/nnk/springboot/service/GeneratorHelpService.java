@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Data
@@ -327,5 +328,39 @@ public class GeneratorHelpService {
             tradeList.add(trade);
         }
         return tradeList;
+    }
+
+    public List<User> generatorUserTest(int nombreDeGeneration) {
+        List<User> userList = new ArrayList<>();
+        for (int i = 0; i < nombreDeGeneration; i++) {
+            User user = new User();
+
+            while (user.getUsername() == null) {
+                Random random = new Random((System.currentTimeMillis()));
+                int chiffreAleatoire = random.nextInt(1000000);
+                if (!userRepository.findByUsername("testUserName " + i + chiffreAleatoire).isPresent()) {
+                    user.setUsername("testUserName " + i + chiffreAleatoire);
+                }
+            }
+            while (user.getPassword() == null) {
+                Random random = new Random((System.currentTimeMillis()));
+                int chiffreAleatoire = random.nextInt(1000000);
+                if (!userRepository.findByPassword("testPassword " + i + chiffreAleatoire).isPresent()) {
+                    user.setPassword("testPassword " + i + chiffreAleatoire);
+                }
+            }
+            while (user.getFullname() == null) {
+                Random random = new Random((System.currentTimeMillis()));
+                int chiffreAleatoire = random.nextInt(1000000);
+                if (!userRepository.findByFullname("testFullName " + i + chiffreAleatoire).isPresent()) {
+                    user.setFullname("testFullName " + i + chiffreAleatoire);
+                }
+            }
+
+            user.setRole("User");
+            userRepository.save(user);
+            userList.add(user);
+            }
+        return userList;
     }
 }

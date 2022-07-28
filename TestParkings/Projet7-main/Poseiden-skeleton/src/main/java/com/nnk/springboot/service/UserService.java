@@ -1,19 +1,20 @@
 package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.domain.UserType;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.security.SecurityConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
+@Slf4j
 @Service
 public class UserService implements UserDetailsService {
 
@@ -47,6 +48,7 @@ public class UserService implements UserDetailsService {
      * @param user
      */
     public void creerNewUser(User user) {
+        user.setUserType(UserType.LOCAL);
         userRepository.save(user);
     }
 
@@ -115,6 +117,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Objects.requireNonNull(username);
-        return userRepository.findUserWithName(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        log.info("UserTypeLocal"+ userRepository.findByUsername(username).orElseGet(null).getUserType());
+        return userRepository.findByUsernameAndUserType(username, UserType.LOCAL).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

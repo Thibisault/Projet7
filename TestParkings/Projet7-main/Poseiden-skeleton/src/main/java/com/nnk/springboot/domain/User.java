@@ -1,6 +1,7 @@
 package com.nnk.springboot.domain;
 
 
+import org.checkerframework.common.aliasing.qual.Unique;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -27,16 +28,21 @@ public class User implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+
+    @Column(unique=true)
     @NotBlank(message = "Username is mandatory")
     private String username;
+
     @NotBlank(message = "Password is mandatory")
     private String password;
+
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
+
     @NotBlank(message = "Role is mandatory")
     private String role;
 
-
+    private UserType userType;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
