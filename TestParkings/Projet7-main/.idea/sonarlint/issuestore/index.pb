@@ -47,8 +47,6 @@ MPoseiden-skeleton/src/main/java/com/nnk/springboot/service/RatingService.java,
 QPoseiden-skeleton/src/test/java/com/nnk/springboot/service/RatingServiceTest.java,5\d\5d5184103f357a7d5d5ac1b5c52513d3dedb1b7e
 z
 JPoseiden-skeleton/src/test/java/com/nnk/springboot/PasswordEncodeTest.java,0\0\00bfd0b3336b8884fbdd58d89f2504ed3dfd3fd6
-‚
-RPoseiden-skeleton/src/test/java/com/nnk/springboot/service/BidlistServiceTest.java,4\b\4b7df21d5b4a7e586c8559f455b485e9089869bd
 ‰
 YPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/CurvePointRepository.java,4\1\41baad01cd01b01467e41e0cc6f8cbdc83a0efed
 …
