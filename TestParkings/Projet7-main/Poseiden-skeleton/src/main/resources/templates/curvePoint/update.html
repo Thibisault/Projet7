@@ -29,14 +29,14 @@
 			<div class="form-group">
 				<label for="term" class="col control-label">term</label>
 				<div class="col">
-					<input type="number" th:field="*{term}" id="type" placeholder="type" class="col-4">
+					<input type="number" step="any" th:field="*{term}" id="type" placeholder="type" class="col-4">
 					<p class="text-danger" th:if="${#fields.hasErrors('term')}" th:errors="*{term}"></p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="value" class="col control-label">value</label>
 				<div class="col">
-					<input type="number" th:field="*{value}" id="value" placeholder="value" class="col-4">
+					<input type="number" step="any" th:field="*{value}" id="value" placeholder="value" class="col-4">
 					<p class="text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></p>
 				</div>
 			</div>

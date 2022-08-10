@@ -3,6 +3,8 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import com.nnk.springboot.service.RulenameService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ import javax.validation.Valid;
 @Controller
 public class RuleNameController {
 
+    Logger logger = LoggerFactory.getLogger(RuleNameController.class);
+
+
     @Autowired
     RulenameService rulenameService;
 
@@ -29,6 +34,7 @@ public class RuleNameController {
     public String home(Model model)
     {
         model.addAttribute("allRuleName", rulenameService.chercherToutRuleName());
+        logger.info("Action getList RuleNameController");
         return "ruleName/list";
     }
 
@@ -39,6 +45,7 @@ public class RuleNameController {
      */
     @GetMapping("/ruleName/add")
     public String addRuleForm(RuleName bid) {
+        logger.info("Action getAdd RuleNameController");
         return "ruleName/add";
     }
 
@@ -52,10 +59,12 @@ public class RuleNameController {
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
         if(result.hasErrors()){
+            logger.info("Action postAdd error RuleNameController");
             return "ruleName/add";
         } else{
             rulenameService.creerNewRuleName(ruleName);
             model.addAttribute("newRuleName", ruleName);
+            logger.info("Action postAdd RuleNameController");
         }
         return "ruleName/add";
     }
@@ -69,6 +78,7 @@ public class RuleNameController {
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("updateRuleName", rulenameService.chercherById(id));
+        logger.info("Action getUpdate RuleNameController");
         return "ruleName/update";
     }
 
@@ -84,11 +94,13 @@ public class RuleNameController {
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
         if(result.hasErrors()){
+            logger.info("Action postUpdate error RuleNameController");
             return "redirect:ruleName/update/{id}";
         } else {
             ruleName.setId(id);
             rulenameService.creerNewRuleName(ruleName);
             model.addAttribute("allRuleName", rulenameService.chercherToutRuleName());
+            logger.info("Action postUpdate RuleNameController");
         }
         return "redirect:/ruleName/list";
     }
@@ -103,6 +115,7 @@ public class RuleNameController {
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
         rulenameService.supprimerBidList(rulenameService.chercherById(id));
         model.addAttribute("allRuleName", rulenameService.chercherToutRuleName());
+        logger.info("Action getDelete RuleNameController");
         return "redirect:/ruleName/list";
     }
 }

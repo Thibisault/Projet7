@@ -3,6 +3,8 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.service.RatingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ import javax.validation.Valid;
 @Controller
 public class RatingController {
 
+    Logger logger = LoggerFactory.getLogger(RatingController.class);
+
+
     @Autowired
     RatingService ratingService;
 
@@ -29,6 +34,7 @@ public class RatingController {
     public String home(Model model)
     {
         model.addAttribute("allRating", ratingService.chercherToutRating());
+        logger.info("Action getList RatingController");
         return "rating/list";
     }
 
@@ -39,6 +45,7 @@ public class RatingController {
      */
     @GetMapping("/rating/add")
     public String addRatingForm(Rating rating) {
+        logger.info("Action getAdd RatingController");
         return "rating/add";
     }
 
@@ -52,10 +59,12 @@ public class RatingController {
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
         if(result.hasErrors()){
+            logger.info("Action postAdd error RatingController");
             return"rating/add";
         }
         ratingService.creerNewRating(rating);
         model.addAttribute("newRating", rating);
+        logger.info("Action postAdd RatingController");
         return "rating/add";
     }
 
@@ -68,6 +77,7 @@ public class RatingController {
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("updateRating", ratingService.chercherById(id));
+        logger.info("Action getUpdate RatingController");
         return "rating/update";
     }
 
@@ -83,11 +93,13 @@ public class RatingController {
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                              BindingResult result, Model model) {
         if (result.hasErrors()){
+            logger.info("Action postUpdate error RatingController");
             return"redirect:rating/update/{id}";
         } else{
             rating.setId(id);
             ratingService.creerNewRating(rating);
             model.addAttribute("allRating", ratingService.chercherToutRating());
+            logger.info("Action postUpdate RatingController");
         }
         return "redirect:/rating/list";
     }
@@ -102,6 +114,7 @@ public class RatingController {
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         ratingService.supprimerBidList(ratingService.chercherById(id));
         model.addAttribute("allRating", ratingService.chercherToutRating());
+        logger.info("Action getDelete RatingController");
         return "redirect:/rating/list";
     }
 }

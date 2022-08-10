@@ -5,10 +5,17 @@ import com.nnk.springboot.repositories.BidListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class BidlistService {
+
+    Logger logger = LoggerFactory.getLogger(BidlistService.class);
 
     @Autowired
     BidListRepository bidListRepository;
@@ -19,6 +26,7 @@ public class BidlistService {
      * @param bidList
      */
     public BidList creerNewBidlist(BidList bidList) {
+        logger.info("Action create new BidList");
         return bidListRepository.save(bidList);
     }
 
@@ -30,6 +38,7 @@ public class BidlistService {
     public List<BidList> chercherTouteLesBidList() {
         List<BidList> bidList;
         bidList = bidListRepository.findAll();
+        logger.info("Action search all Bidlist");
         return bidList;
     }
 
@@ -39,6 +48,7 @@ public class BidlistService {
      */
     public void supprimerBidList(BidList bidList){
         bidListRepository.delete(bidList);
+        logger.info("Action delete Bidlist");
     }
 
     /**

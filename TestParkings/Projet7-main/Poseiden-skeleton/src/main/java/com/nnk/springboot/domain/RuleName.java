@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
@@ -20,22 +21,22 @@ public class RuleName {
     @GeneratedValue(strategy= GenerationType.AUTO)
     Integer id;
 
-    @NotEmpty(message="must not be empty")
+    @NotBlank(message="must not be empty")
     String name;
 
-    @NotEmpty(message="must not be empty")
+    @NotBlank(message="must not be empty")
     String description;
 
-    @NotEmpty(message="must not be empty")
+    @NotBlank(message="must not be empty")
     String json;
 
-    @NotEmpty(message="must not be empty")
+    @NotBlank(message="must not be empty")
     String template;
 
-    @NotEmpty(message="must not be empty")
+    @NotBlank(message="must not be empty")
     String sqlStr;
 
-    @NotEmpty(message="must not be empty")
+    @NotBlank(message="must not be empty")
     String sqlPart;
 
     public RuleName(String rule_name, String description, String json, String template, String sql, String sql_part) {

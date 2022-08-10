@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -21,13 +22,13 @@ public class Rating {
     @GeneratedValue(strategy= GenerationType.AUTO)
     Integer id;
 
-    @NotEmpty(message="Must not be empty")
+    @NotBlank(message="Must not be empty")
     String moodysRating;
 
-    @NotEmpty(message="Must not be empty")
+    @NotBlank(message="Must not be empty")
     String sandPRating;
 
-    @NotEmpty(message="Must not be empty")
+    @NotBlank(message="Must not be empty")
     String fitchRating;
 
     @NotNull(message="Must not be null")

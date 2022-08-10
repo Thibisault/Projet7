@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
@@ -23,10 +24,10 @@ public class Trade {
     Integer tradeId;
 
 
-    @NotEmpty(message="Must not be empty")
+    @NotBlank(message="Must not be empty")
     String account;
 
-    @NotEmpty(message="Must not be empty")
+    @NotBlank(message="Must not be empty")
     String type;
 
     @NotNull(message="must not be null")

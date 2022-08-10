@@ -4,9 +4,12 @@ import com.nnk.springboot.domain.*;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.*;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +17,11 @@ import java.util.Random;
 
 @Data
 @Service
+@Transactional
 public class GeneratorHelpService {
+
+    Logger logger = LoggerFactory.getLogger(GeneratorHelpService.class);
+
 
     @Autowired
     private BidListRepository bidListRepository;

@@ -2,6 +2,9 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.service.BidlistService;
+import com.nnk.springboot.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,8 @@ import javax.validation.Valid;
 @Controller
 public class BidListController {
 
+    Logger logger = LoggerFactory.getLogger(BidListController.class);
+
     @Autowired
     BidlistService bidlistService;
 
@@ -29,6 +34,7 @@ public class BidListController {
     public String home(Model model)
     {
         model.addAttribute("allBidList", bidlistService.chercherTouteLesBidList());
+        logger.info("Action getList BidListController");
         return "bidList/list";
     }
 
@@ -39,6 +45,7 @@ public class BidListController {
      */
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bid) {
+        logger.info("Action getAdd BidListController");
         return "bidList/add";
     }
 
@@ -52,10 +59,12 @@ public class BidListController {
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bidList, BindingResult result, Model model) {
         if(result.hasErrors()){
+            logger.info("Action postAdd error BidListController");
             return "bidList/add";
         }else{
             bidlistService.creerNewBidlist(bidList);
             model.addAttribute("newBidlist", bidList);
+            logger.info("Action postAdd BidListController");
         }
         return "bidList/add";
     }
@@ -69,6 +78,7 @@ public class BidListController {
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("updateBidList", bidlistService.chercherByBidListId(id));
+        logger.info("Action getUpdate BidListController");
         return "bidList/update";
     }
 
@@ -84,11 +94,13 @@ public class BidListController {
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
                             BindingResult result, Model model) {
         if(result.hasErrors()){
+            logger.info("Action postUpdate error BidListController");
             return "redirect:/bidList/update/{id}";
         }else{
             bidList.setBidListId(id);
             bidlistService.creerNewBidlist(bidList);
             model.addAttribute("allBidList", bidlistService.chercherTouteLesBidList());
+            logger.info("Action postUpdate BidListController");
         }
         return "redirect:/bidList/list";
     }
@@ -103,6 +115,7 @@ public class BidListController {
     public String showDeleteBid(@PathVariable("id") Integer id, Model model) {
         bidlistService.supprimerBidList(bidlistService.chercherByBidListId(id));
         model.addAttribute("allBidList", bidlistService.chercherTouteLesBidList());
+        logger.info("Action postDelete BidListController");
         return "redirect:/bidList/list";
     }
 }

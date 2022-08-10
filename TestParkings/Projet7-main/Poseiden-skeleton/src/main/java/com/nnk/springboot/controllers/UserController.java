@@ -3,6 +3,8 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.LoginService;
 import com.nnk.springboot.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController {
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     UserService userService;
@@ -29,6 +33,7 @@ public class UserController {
     public String home(Model model)
     {
         model.addAttribute("allUser", userService.chercherTouteUser());
+        logger.info("Action getList UserController");
         return "user/list";
     }
 
@@ -39,6 +44,7 @@ public class UserController {
      */
     @GetMapping("/user/add")
     public String addUser(User bid) {
+        logger.info("Action getAdd UserController");
         return "user/add";
     }
 
@@ -54,6 +60,7 @@ public class UserController {
         if (!result.hasErrors()) {
             loginService.validerConnection(user);
             model.addAttribute("user", userService.chercherTouteUser());
+            logger.info("Action postAdd UserController");
             return "redirect:/user/list";
         }
         return "user/add";
@@ -69,6 +76,7 @@ public class UserController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         User user = userService.chercherByIdWithException(id);
         model.addAttribute("updateUser", user);
+        logger.info("Action getUpdate UserController");
         return "user/update";
     }
 
@@ -112,6 +120,7 @@ public class UserController {
         User user = userService.chercherByIdWithException(id);
         userService.supprimerUser(user);
         model.addAttribute("user", userService.chercherTouteUser());
+        logger.info("Action getDelete UserController");
         return "redirect:/user/list";
     }
 }

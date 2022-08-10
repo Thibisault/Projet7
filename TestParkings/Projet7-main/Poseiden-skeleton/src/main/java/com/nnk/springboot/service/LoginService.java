@@ -5,15 +5,22 @@ import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.security.SecurityConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class LoginService {
+
+    Logger logger = LoggerFactory.getLogger(LoginService.class);
+
 
     SecurityConfig securityConfig = new SecurityConfig();
 
@@ -35,6 +42,7 @@ public class LoginService {
         if (securityConfig.passwordEncoder().matches(password, user.getPassword())) {
             return user;
         }
+        logger.info("Action udpate with no password change user");
         throw new Exception("Le mot de passe ne correspond pas au pseudo");
     }
 
@@ -47,6 +55,7 @@ public class LoginService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
+        logger.info("Action validate connection user");
         return user;
     }
 
@@ -60,6 +69,7 @@ public class LoginService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         user.setId(id);
+        logger.info("Action encrypt password user");
         return user;
     }
 

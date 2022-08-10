@@ -1,6 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RestController
 public class LoginController {
+
+    Logger logger = LoggerFactory.getLogger(LoginController.class);
+
 
     @Autowired
     UserService userService;
@@ -22,6 +27,7 @@ public class LoginController {
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("login");
+        logger.info("Action getLogin LoginController");
         return mav;
     }
 
@@ -33,6 +39,7 @@ public class LoginController {
     public ModelAndView logout() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("login");
+        logger.info("Action getLogout LoginController");
         return mav;
     }
 
@@ -41,6 +48,7 @@ public class LoginController {
         ModelAndView mav = new ModelAndView();
         mav.addObject("users", userService.chercherTouteUser());
         mav.setViewName("user/list");
+        logger.info("Action getSecureArticleDetails LoginController");
         return mav;
     }
 
@@ -55,6 +63,7 @@ public class LoginController {
         String errorMessage= "You are not authorized for the requested data.";
         mav.addObject("errorMsg", errorMessage);
         mav.setViewName("403");
+        logger.info("Action getError403 LoginController");
         return mav;
     }
 }

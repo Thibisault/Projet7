@@ -3,14 +3,21 @@ package com.nnk.springboot.service;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class TradeService {
+
+    Logger logger = LoggerFactory.getLogger(TradeService.class);
+
 
     @Autowired
     TradeRepository tradeRepository;
@@ -21,6 +28,7 @@ public class TradeService {
      * @param trade
      */
     public void creerNewTrade(Trade trade) {
+        logger.info("Action create new  Trade");
         tradeRepository.save(trade);
     }
 
@@ -32,6 +40,7 @@ public class TradeService {
     public List<Trade> chercherTouteLesTrade() {
         List<Trade> tradeList = new ArrayList<>();
         tradeList = tradeRepository.findAll();
+        logger.info("Action find all Trade");
         return tradeList;
     }
 
@@ -41,6 +50,7 @@ public class TradeService {
      * @return
      */
     public Trade chercherByTradeId(Integer tradeId) {
+        logger.info("Action find byId Trade");
         return tradeRepository.findByTradeId(tradeId).orElse(null);
     }
 
@@ -49,6 +59,7 @@ public class TradeService {
      * @param trade
      */
     public void supprimerTrade(Trade trade){
+        logger.info("Action delte Trade");
         tradeRepository.delete(trade);
     }
 

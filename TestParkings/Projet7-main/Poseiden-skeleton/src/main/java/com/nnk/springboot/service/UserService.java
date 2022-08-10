@@ -5,18 +5,25 @@ import com.nnk.springboot.domain.UserType;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.security.SecurityConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 
 @Slf4j
 @Service
+@Transactional
 public class UserService implements UserDetailsService {
+
+    Logger logger = LoggerFactory.getLogger(UserService.class);
+
 
     @Autowired
     UserRepository userRepository;
@@ -34,9 +41,11 @@ public class UserService implements UserDetailsService {
      */
     public void updateUserSansChangerMDP(Integer id, User user){
         if(user.getPassword().equals("")) {
+            logger.info("Action udpate no change password if password is empty User");
             User userBdd = userRepository.findById(id).orElse(null);
             user.setPassword(userBdd.getPassword());
         } else {
+            logger.info("Action udpate no change password if password is complete User");
             loginService.encrypterPassword(user, id);
         }
         userRepository.save(user);
@@ -49,6 +58,7 @@ public class UserService implements UserDetailsService {
      */
     public void creerNewUser(User user) {
         user.setUserType(UserType.LOCAL);
+        logger.info("Action create new User");
         userRepository.save(user);
     }
 
@@ -60,6 +70,7 @@ public class UserService implements UserDetailsService {
     public List<User> chercherTouteUser() {
         List<User> userList;
         userList = userRepository.findAll();
+        logger.info("Action find all User");
         return userList;
     }
 
@@ -69,6 +80,7 @@ public class UserService implements UserDetailsService {
      * @return
      */
     public User chercherById(Integer userId) {
+        logger.info("Action find byId User");
         return userRepository.findById(userId).orElse(null);
     }
 
@@ -78,6 +90,7 @@ public class UserService implements UserDetailsService {
      * @return
      */
     public User chercherByIdWithException(Integer userId) {
+        logger.info("Action find ByIdWithException User");
         return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + userId));
     }
 
@@ -86,6 +99,7 @@ public class UserService implements UserDetailsService {
      * @param user
      */
     public void supprimerUser(User user) {
+        logger.info("Action delete User");
         userRepository.delete(user);
     }
 
@@ -99,6 +113,7 @@ public class UserService implements UserDetailsService {
     public User seConnecter (String userName, String password) throws Exception {
         User user = this.chercherByUsername(userName);
         if (securityConfig.passwordEncoder().matches(password, user.getPassword())){
+            logger.info("Action conexion User");
             return user;
         }
         throw new Exception("Le mot de passe ne correspond pas au pseudo");
@@ -110,6 +125,7 @@ public class UserService implements UserDetailsService {
      * @return
      */
     public User chercherByUsername (String username){
+        logger.info("Action find byUsername User");
         return userRepository.findByUsername(username).orElse(null);
     }
 

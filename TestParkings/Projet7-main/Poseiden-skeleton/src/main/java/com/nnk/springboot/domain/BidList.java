@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
@@ -26,12 +27,12 @@ public class BidList {
     private Integer bidListId;
 
     @Basic
-    @NotEmpty(message = "Account is mandatory")
+    @NotBlank(message = "Account is mandatory")
     @Column(name = "account")
     private String account;
 
     @Basic
-    @NotEmpty(message = "Type is mandatory")
+    @NotBlank(message = "Type is mandatory")
     @Column(name = "type")
     private String type;
 

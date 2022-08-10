@@ -2,15 +2,21 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.repositories.CurvePointRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class CurvepointService {
+
+    Logger logger = LoggerFactory.getLogger(CurvepointService.class);
 
     @Autowired
     CurvePointRepository curvePointRepository;
@@ -22,6 +28,7 @@ public class CurvepointService {
      * @return
      */
     public void creerNewCurvepointService(CurvePoint curvePoint) {
+        logger.info("Action create CurvePoint");
         curvePointRepository.save(curvePoint);
     }
 
@@ -32,6 +39,7 @@ public class CurvepointService {
     public List<CurvePoint> chercherTouteLesCurvesPoint() {
         List<CurvePoint> curvePointList = new ArrayList<>();
         curvePointList = curvePointRepository.findAll();
+        logger.info("Action chercher all CurvePoint");
         return curvePointList;
     }
 
@@ -40,6 +48,7 @@ public class CurvepointService {
      * @param curvePoint
      */
     public void supprimerBidList(CurvePoint curvePoint){
+        logger.info("Action delete CurvePoint");
         curvePointRepository.delete(curvePoint);
     }
 
